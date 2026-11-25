@@ -123,7 +123,7 @@ if(strpos($softInfo, "function down_p(){") !== false  && empty($webpage)) {
 		$sign = isset($segment[1][1]) ? $segment[1][1] : '';
 	}
 	//下载接口可能是绝对地址（apifile.lanzouw.com），也可能是相对地址，统一补全为绝对地址
-	preg_match_all("~(?:https?://[^/\s]+/)?(ajax(?:m|file)\.php\?file=\d+)~", $softInfo, $ajaxm);
+	preg_match_all("~(?:https?://[^/\s]+/)?(ajax(?:m|files?)\.php\?file=\d+)~", $softInfo, $ajaxm);
 	$ajaxPath = isset($ajaxm[0][0]) ? $ajaxm[0][0] : '';
 	if ($ajaxPath !== '' && strpos($ajaxPath, 'http') !== 0) {
 		$ajaxPath = $origin . '/' . ltrim($ajaxPath, '/');
@@ -159,7 +159,7 @@ if(strpos($softInfo, "function down_p(){") !== false  && empty($webpage)) {
 	preg_match_all("~'sign':'(.*?)'~", $softInfo, $segment);
 	if(!empty($webpage) && !empty($segment[1][1])){
 	    preg_match_all("~ajaxdata = '(.*?)'~", $softInfo, $signs);
-	    preg_match_all("~(?:https?://[^/\s]+/)?(ajax(?:m|file)\.php\?file=\d+)~", $softInfo, $ajaxm);
+	    preg_match_all("~(?:https?://[^/\s]+/)?(ajax(?:m|files?)\.php\?file=\d+)~", $softInfo, $ajaxm);
 	    $post_data = array(
 		    "action" => "downprocess",
 		    "websignkey" => "Em2R",
@@ -175,7 +175,7 @@ if(strpos($softInfo, "function down_p(){") !== false  && empty($webpage)) {
 	    $softInfo = MloocCurlGetWithChallenge($ifurl, $UserAgent, $cookie, $url);
 	    preg_match_all("~wp_sign = '(.*?)'~", $softInfo, $segment);
 	    preg_match_all("~ajaxdata = '(.*?)'~", $softInfo, $signs);
-	    preg_match_all("~(?:https?://[^/\s]+/)?(ajax(?:m|file)\.php\?file=\d+)~", $softInfo, $ajaxm);
+	    preg_match_all("~(?:https?://[^/\s]+/)?(ajax(?:m|files?)\.php\?file=\d+)~", $softInfo, $ajaxm);
 	    $softSign = isset($segment[1][0]) ? $segment[1][0] : '';
 	    $softWebsign = isset($signs[1][0]) ? $signs[1][0] : '';
 	    if($softSign === '') {
